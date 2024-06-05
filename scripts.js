@@ -8,7 +8,7 @@ function enviarMensagem() {
     
     // Simulando resposta do ChatBot após 1 segundo
     setTimeout(function() {
-        var resposta = obterRespostaAutomatica();
+        var resposta = obterRespostaAutomatica(mensagem);
         adicionarMensagem("ChatBot", resposta);
     }, 1000);
 }
@@ -21,7 +21,12 @@ function adicionarMensagem(usuario, mensagem) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function obterRespostaAutomatica() {
-    // Simplesmente retornando uma resposta fixa para este exemplo
-    return "Olá! Como posso ajudar você?";
-}
+function obterRespostaAutomatica(pergunta) {
+    // Lista de pares de perguntas e respostas
+    var pares = [
+        { pergunta: "Olá", resposta: "Olá! Como posso ajudar?" },
+        { pergunta: "Qual é o seu nome?", resposta: "Meu nome é ChatBot." },
+        { pergunta: "Como você está?", resposta: "Estou bem, obrigado por perguntar!" },
+        // Adicione mais pares de pergunta e resposta conforme necessário
+        { pergunta: "Qual é a sua cor favorita?", resposta: "Eu não tenho 
+
