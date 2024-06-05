@@ -1,104 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatBot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .chat-container {
-            max-width: 400px;
-            margin: 20px auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .chat-box {
-            padding: 10px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        input[type="text"] {
-            width: calc(100% - 70px);
-            padding: 10px;
-            border: none;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-        }
-
-        button {
-            width: 70px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .chat-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .chat-container::-webkit-scrollbar-thumb {
-            background-color: #888;
-            border-radius: 4px;
-        }
-
-        .chat-container::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
-        }
-    </style>
+    <title>Exemplo de IA em HTML</title>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-box" id="chatBox"></div>
-        <input type="text" id="userInput" placeholder="Digite sua mensagem...">
-        <button onclick="enviarMensagem()">Enviar</button>
-    </div>
+    <div id="output"></div>
 
     <script>
-        function enviarMensagem() {
-            var userInput = document.getElementById("userInput");
-            var mensagem = userInput.value;
-            if (mensagem.trim() === "") return;
-
-            adicionarMensagem("Você", mensagem);
-            userInput.value = "";
-
-            // Simulando uma resposta do ChatBot
-            var resposta = obterRespostaAutomatica(mensagem);
-            setTimeout(function () {
-                adicionarMensagem("ChatBot", resposta);
-            }, 1000);
+        // Função para exibir informações extraídas do HTML
+        function exibirInformacoes() {
+            // Seleciona o elemento 'title' e obtém seu conteúdo
+            var title = document.querySelector("title").textContent;
+            
+            // Seleciona o elemento 'meta' com o atributo 'name' igual a 'description' e obtém o conteúdo do atributo 'content'
+            var description = document.querySelector("meta[name='description']").getAttribute("content");
+            
+            // Seleciona o elemento 'meta' com o atributo 'name' igual a 'keywords' e obtém o conteúdo do atributo 'content'
+            var keywords = document.querySelector("meta[name='keywords']").getAttribute("content").split(",");
+            
+            // Seleciona o elemento 'meta' com o atributo 'property' igual a 'og:image' e obtém o conteúdo do atributo 'content'
+            var imageUrl = document.querySelector("meta[property='og:image']").getAttribute("content");
+            
+            // Exibe as informações na página
+            var outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "<h1>Título: " + title + "</h1>";
+            outputDiv.innerHTML += "<p>Descrição: " + description + "</p>";
+            outputDiv.innerHTML += "<p>Palavras-chave: " + keywords.join(", ") + "</p>";
+            outputDiv.innerHTML += "<img src='" + imageUrl + "' alt='Imagem' />";
         }
 
-        function adicionarMensagem(usuario, mensagem) {
-            var chatBox = document.getElementById("chatBox");
-            var div = document.createElement("div");
-            div.innerHTML = "<strong>" + usuario + ":</strong> " + mensagem;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function obterRespostaAutomatica(pergunta) {
-            // Simulação de resposta do ChatBot
-            if (pergunta.toLowerCase().includes("oi")) {
-                return "Olá! Como posso ajudar?";
-            } else if (pergunta.toLowerCase().includes("como você está?")) {
-                return "Estou bem, obrigado por perguntar!";
-            } else {
-                return "Desculpe, não entendi. Pode reformular a pergunta?";
-            }
-        }
+        // Chama a função ao carregar a página
+        window.onload = exibirInformacoes;
     </script>
 </body>
 </html>
