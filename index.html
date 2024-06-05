@@ -4,7 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatBot</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .chat-container {
+            max-width: 400px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .chat-box {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 70px);
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        button {
+            width: 70px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 <body>
     <div class="chat-container">
@@ -13,6 +65,40 @@
         <button onclick="enviarMensagem()">Enviar</button>
     </div>
 
-    <script src="scripts.js"></script>
+    <script>
+        function enviarMensagem() {
+            var userInput = document.getElementById("userInput");
+            var mensagem = userInput.value;
+            if (mensagem.trim() === "") return;
+
+            adicionarMensagem("Você", mensagem);
+            userInput.value = "";
+
+            // Simulando uma resposta do ChatBot
+            var resposta = obterRespostaAutomatica(mensagem);
+            setTimeout(function () {
+                adicionarMensagem("ChatBot", resposta);
+            }, 1000);
+        }
+
+        function adicionarMensagem(usuario, mensagem) {
+            var chatBox = document.getElementById("chatBox");
+            var div = document.createElement("div");
+            div.innerHTML = "<strong>" + usuario + ":</strong> " + mensagem;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function obterRespostaAutomatica(pergunta) {
+            // Simulação de resposta do ChatBot
+            if (pergunta.toLowerCase().includes("oi")) {
+                return "Olá! Como posso ajudar?";
+            } else if (pergunta.toLowerCase().includes("como você está?")) {
+                return "Estou bem, obrigado por perguntar!";
+            } else {
+                return "Desculpe, não entendi. Pode reformular a pergunta?";
+            }
+        }
+    </script>
 </body>
 </html>
