@@ -1,36 +1,22 @@
 async function obterRespostaAutomatica(pergunta) {
-    // URL da API externa de previsão do tempo
-    const apiUrl = 'https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=' + encodeURIComponent(pergunta);
+    // Simulação de uma solicitação assíncrona para um serviço externo
+    const respostaDoServicoExterno = await simularSolicitacaoAssincrona(pergunta);
 
-    try {
-        // Fazendo uma solicitação HTTP GET para a API externa
-        const resposta = await fetch(apiUrl);
-        
-        // Verificando se a solicitação foi bem-sucedida
-        if (resposta.ok) {
-            // Convertendo a resposta para o formato JSON
-            const dados = await resposta.json();
-            
-            // Extraindo informações relevantes da resposta
-            const cidade = dados.location.name;
-            const temperatura = dados.current.temp_c;
-            const condicao = dados.current.condition.text;
-            
-            // Construindo a resposta do chatbot com base nas informações da previsão do tempo
-            const respostaChatbot = `A temperatura em ${cidade} é de ${temperatura}°C e está ${condicao}.`;
-            
-            return respostaChatbot;
-        } else {
-            throw new Error('Erro ao obter resposta da API: ' + resposta.status);
-        }
-    } catch (erro) {
-        console.error('Erro ao obter resposta da API:', erro);
-        // Em caso de erro, retornar uma mensagem genérica
-        return "Desculpe, ocorreu um erro ao obter informações do clima.";
-    }
+    return respostaDoServicoExterno;
+}
+
+function simularSolicitacaoAssincrona(pergunta) {
+    return new Promise(resolve => {
+        // Simulando um atraso de 1 segundo para simular uma solicitação assíncrona
+        setTimeout(() => {
+            // Simulando uma resposta do serviço externo
+            const resposta = "Isso é uma resposta do serviço externo para: " + pergunta;
+            resolve(resposta);
+        }, 1000);
+    });
 }
 
 // Exemplo de uso
-obterRespostaAutomatica('São Paulo').then(resposta => {
+obterRespostaAutomatica("Qual é a sua cor favorita?").then(resposta => {
     console.log(resposta);
 });
